@@ -1,7 +1,7 @@
 [
   {
     "key": "graphrag-index",
-    "path": "/home/quoctang/my_projects/graphrag",
+    "path": "../..",
     "name": "GraphRAG local index",
     "description": "Index built at the repo root (output/, settings.yaml, prompts/, .env).",
     "community_level": 2
