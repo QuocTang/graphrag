@@ -13,12 +13,25 @@ dependencies = [
     "azure-search-documents~=11.4",
     "azure-storage-blob~=12.20",
     "azure-identity~=1.16",
-    "graphrag==2.5.0",
+    "graphrag",
     "altair~=5.3",
     "streamlit-agraph~=0.0.45",
     "st-tabs~=0.1",
     "spacy~=3.8",
 ]
+
+# Use the local workspace graphrag (v3, LiteLLM-based) so the app can read the
+# v3 index produced by this repo. graphrag pulls in 7 sibling packages, all of
+# which must be sourced locally since they aren't published at this version.
+[tool.uv.sources]
+graphrag = { path = "../packages/graphrag", editable = true }
+graphrag-cache = { path = "../packages/graphrag-cache", editable = true }
+graphrag-chunking = { path = "../packages/graphrag-chunking", editable = true }
+graphrag-common = { path = "../packages/graphrag-common", editable = true }
+graphrag-input = { path = "../packages/graphrag-input", editable = true }
+graphrag-llm = { path = "../packages/graphrag-llm", editable = true }
+graphrag-storage = { path = "../packages/graphrag-storage", editable = true }
+graphrag-vectors = { path = "../packages/graphrag-vectors", editable = true }
 
 [project.optional-dependencies]
 dev = [
