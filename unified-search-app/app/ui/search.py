@@ -161,10 +161,13 @@ def convert_numbered_list_to_array(numbered_list_str):
     items = []
 
     for line in lines:
-        match = re.match(r"^\d+\.\s*(.*)", line)
-        if match:
-            item = match.group(1).strip()
-            items.append(item)
+        # a single line may hold several inline-numbered items
+        # (e.g. when the model answers in a single paragraph: "1. ... 2. ...")
+        parts = re.split(r"\s*\d+\.\s+", line)
+        if parts and not re.match(r"^\s*\d+\.\s", line):
+            # drop any preamble text before the first numbered marker
+            parts = parts[1:]
+        items.extend(p.strip() for p in parts if p.strip())
 
     return items
 
