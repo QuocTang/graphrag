@@ -6,17 +6,22 @@
 
 completion_models:
   default_completion_model:
-    model_provider: openai
-    model: gpt-4.1
-    auth_method: api_key # or azure_managed_identity
-    api_key: ${GRAPHRAG_API_KEY} # set this in the generated .env file, or remove if managed identity
+    model_provider: openai            # 9router là OpenAI-compatible
+    model: "${GRAPHRAG_CHAT_MODEL}"
+    api_base: "${GRAPHRAG_API_BASE}"  # trỏ tới 9router (xem .env)
+    auth_method: api_key
+    api_key: ${GRAPHRAG_API_KEY}
+    call_args:                        # gpt-oss là reasoning model -> hạ reasoning
+      extra_body:                     # extra_body: đẩy thẳng vào body request OpenAI-compatible
+        reasoning_effort: low         # nếu ko -> đốt hết token vào reasoning, content rỗng
     retry:
-      type: exponential_backoff
+      type: exponential_backoff       # quan trọng: 9router/free-tier hay trả 429
 
 embedding_models:
   default_embedding_model:
     model_provider: openai
-    model: text-embedding-3-large
+    model: "${GRAPHRAG_EMBEDDING_MODEL}"
+    api_base: "${GRAPHRAG_API_BASE}"
     auth_method: api_key
     api_key: ${GRAPHRAG_API_KEY}
     retry:
