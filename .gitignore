@@ -12,7 +12,7 @@ examples_notebooks/*/data
 tests/fixtures/cache
 tests/fixtures/*/cache
 tests/fixtures/*/output
-output/lancedb
+# output/lancedb
 
 
 # Random
